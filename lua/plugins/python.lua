@@ -1,0 +1,15 @@
+-- This file is now deprecated. All Python LSP configs are in init.lua
+-- 
+-- To use Python LSP support, you need to install the following tools via Mason:
+-- 
+-- Inside Neovim, run:
+--   :Mason
+-- 
+-- Then install:
+--   - pyright (Python LSP)
+--   - black (Formatter)
+--   - isort (Import sorter)
+--   - pylint (Linter)
+--   - flake8 (Linter)
+-- 
+-- You can delete this file safely
