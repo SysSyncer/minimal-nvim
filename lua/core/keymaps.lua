@@ -20,9 +20,6 @@ vim.keymap.set("n", "<C-s>", ":w<CR>", { noremap = true, silent = true })       
 vim.keymap.set("n", "<C-w>", ":close<CR>", { noremap = true, silent = true })    -- Close window
 vim.keymap.set("n", "<C-S-q>", ":wqa<CR>", { noremap = true, silent = true })    -- Save and quit all
 
--- Select all (Ctrl + A)
-vim.keymap.set("n", "<C-a>", "ggVG", { noremap = true, silent = true })
-
 -- Toggle file explorer (if using nvim-tree)
 vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 
