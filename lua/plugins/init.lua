@@ -120,6 +120,68 @@ require("lazy").setup({
   },
 
   -----------------------------------------------------------
+  -- Fuzzy Finder (Telescope)
+  -----------------------------------------------------------
+  {
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      local telescope = require("telescope.builtin")
+      
+      -- Keymaps for telescope with leader key
+      vim.keymap.set("n", "<leader>p", telescope.find_files, { noremap = true, silent = true, desc = "Find files" })
+      vim.keymap.set("n", "<leader>f", telescope.live_grep, { noremap = true, silent = true, desc = "Live grep" })
+      vim.keymap.set("n", "<leader>h", telescope.help_tags, { noremap = true, silent = true, desc = "Help tags" })
+    end,
+  },
+
+  -----------------------------------------------------------
+  -- Comment Toggle (leader + /)
+  -----------------------------------------------------------
+  {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup({
+        padding = true,
+        sticky = true,
+        ignore = nil,
+      })
+      
+      -- Custom keymaps with leader key
+      local map = vim.keymap.set
+      local opts = { noremap = true, silent = true }
+      
+      -- Line comment
+      map("n", "<leader>/", function()
+        require("Comment.api").toggle.linewise.current()
+      end, opts)
+      
+      -- Visual mode comment
+      map("v", "<leader>/", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
+    end,
+  },
+
+  -----------------------------------------------------------
+  -- Inline Diagnostics (virtual text)
+  -----------------------------------------------------------
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+      -- Show diagnostics as virtual text
+      vim.diagnostic.config({
+        virtual_text = true,
+        virtual_lines = false,
+        float = {
+          source = "always",
+          border = "rounded",
+        },
+      })
+    end,
+  },
+
+  -----------------------------------------------------------
   -- Python LSP, Formatting & Linting
   -----------------------------------------------------------
   {
@@ -162,7 +224,7 @@ require("lazy").setup({
         formatters_by_ft = {
           python = { "black", "isort" },
         },
-        -- Use LSP formatting as fallback if formatters not available
+        -- Format on save
         format_on_save = {
           timeout_ms = 500,
           lsp_fallback = true,
@@ -170,13 +232,11 @@ require("lazy").setup({
         -- Suppress errors from missing formatters
         formatters = {
           black = {
-            -- Don't error if black is not found
             condition = function()
               return vim.fn.executable("black") == 1
             end,
           },
           isort = {
-            -- Don't error if isort is not found
             condition = function()
               return vim.fn.executable("isort") == 1
             end,
@@ -231,6 +291,7 @@ require("lazy").setup({
           javascriptreact = { "prettier" },
           typescriptreact = { "prettier" },
         },
+        -- Format on save
         format_on_save = {
           timeout_ms = 500,
           lsp_fallback = true,
@@ -285,6 +346,7 @@ require("lazy").setup({
         formatters_by_ft = {
           go = { "goimports", "gofmt" },
         },
+        -- Format on save
         format_on_save = {
           timeout_ms = 500,
           lsp_fallback = true,
