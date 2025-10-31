@@ -163,6 +163,33 @@ require("lazy").setup({
   },
 
   -----------------------------------------------------------
+  -- Terminal (toggleterm.nvim)
+  -----------------------------------------------------------
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("toggleterm").setup({
+        size = 20,
+        open_mapping = [[<C-\>]],  -- Toggle terminal with Ctrl+\
+        hide_numbers = true,
+        shade_filetypes = {},
+        autochdir = false,  -- change dir when opening terminal
+        start_in_insert = true,
+        insert_mappings = true,
+        terminal_mappings = true,
+        persist_size = true,
+        persist_mode = true,
+        direction = "horizontal",  -- horizontal, vertical, tab, float
+      })
+      
+      -- Additional keymaps for terminal
+      vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>", { noremap = true, silent = true, desc = "Toggle terminal" })
+      vim.keymap.set("t", "<C-\\>", [[<C-\><C-n>:ToggleTerm<CR>]], { noremap = true, silent = true, desc = "Exit terminal" })
+    end,
+  },
+
+  -----------------------------------------------------------
   -- Inline Diagnostics (virtual text)
   -----------------------------------------------------------
   {
@@ -246,6 +273,8 @@ require("lazy").setup({
     end,
   },
 
+
+
   -----------------------------------------------------------
   -- JavaScript/TypeScript Formatting & Linting
   -----------------------------------------------------------
@@ -310,33 +339,9 @@ require("lazy").setup({
   -----------------------------------------------------------
   -- Go Formatting & Linting
   -----------------------------------------------------------
-  {
-    "mfussenegger/nvim-lint",
-    ft = { "go" },
-    config = function()
-      local lint = require("lint")
-      
-      local available_linters = {}
-      for _, linter in ipairs({ "golangci-lint" }) do
-        if vim.fn.executable(linter) == 1 then
-          table.insert(available_linters, linter)
-        end
-      end
-      
-      lint.linters_by_ft = {
-        go = available_linters,
-      }
-      
-      if #available_linters > 0 then
-        vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-          pattern = "*.go",
-          callback = function()
-            lint.try_lint()
-          end,
-        })
-      end
-    end,
-  },
+  -----------------------------------------------------------
+  -- Go Formatting & Linting
+  -----------------------------------------------------------
 
   {
     "stevearc/conform.nvim",
