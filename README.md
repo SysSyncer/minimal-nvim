@@ -6,6 +6,40 @@ A fully-featured Neovim IDE configuration with multi-language support, LSP integ
 
 ---
 
+## Why This Config?
+
+Most Neovim configurations are either:
+- Too minimal - Require extensive manual setup to be productive
+- Too opinionated - Hard to customize without deep Lua knowledge
+- Single-language focused - Don't handle multiple languages well
+- Platform-specific - Installation guides only for one OS
+
+**minimal-nvim** solves this by providing:
+
+* **Batteries Included** - Fully functional IDE out of the box, no configuration needed
+
+* **Multi-Language Ready** - Python, JavaScript, TypeScript, Go, and Java all pre-configured to work together
+
+* **Cross-Platform** - Detailed installation steps for macOS, Linux (Ubuntu/Debian/Fedora/Arch), and Windows
+
+* **Clean & Maintainable** - ~600 lines of well-organized Lua code. Easy to understand and modify
+
+* **Modern Standards** - Uses Neovim 0.11.4+ native APIs (vim.lsp.config) instead of deprecated patterns
+
+* **Production Ready** - Format on save, linting, completion, and diagnostics all working out of the box
+
+### Philosophy
+
+This config prioritizes **pragmatism over perfection**:
+- Curated selection of proven plugins that work well together
+- Sensible defaults that work for most developers
+- Graceful error handling (formatters/linters are optional)
+- Comprehensive documentation so you understand every choice made
+
+It's designed for developers who want a powerful IDE without spending hours configuring Neovim.
+
+---
+
 ## 📋 Table of Contents
 
 - [Features](#features)
@@ -22,38 +56,38 @@ A fully-featured Neovim IDE configuration with multi-language support, LSP integ
 
 ---
 
-## ✨ Features
+## Features
 
-- 🎨 **Modern UI** - GitHub Dark High Contrast theme with statusline and bufferline
-- 🔍 **Fuzzy Finder** - Telescope for file search and live grep
-- 💬 **Code Comments** - Toggle comments with a single keymap
-- 📝 **Auto-Formatting** - Automatic code formatting on save
-- 🔧 **Linting** - Real-time code linting for multiple languages
-- 🎯 **Code Completion** - LSP-powered autocompletion with snippets
-- 📂 **File Explorer** - nvim-tree for project navigation
-- 🖥️ **Terminal** - Built-in terminal with toggleterm.nvim
-- 🔴 **Inline Diagnostics** - Virtual text showing errors and warnings
-- 🌐 **Multi-Language** - Python, JavaScript, TypeScript, Go, Java support
+- Modern UI - GitHub Dark High Contrast theme with statusline and bufferline
+- Fuzzy Finder - Telescope for file search and live grep
+- Code Comments - Toggle comments with a single keymap
+- Auto-Formatting - Automatic code formatting on save
+- Linting - Real-time code linting for multiple languages
+- Code Completion - LSP-powered autocompletion with snippets
+- File Explorer - nvim-tree for project navigation
+- Terminal - Built-in terminal with toggleterm.nvim
+- Inline Diagnostics - Virtual text showing errors and warnings
+- Multi-Language - Python, JavaScript, TypeScript, Go, Java support
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 
 #### All Platforms
 
-1. **Neovim 0.11.4+**
+1. Neovim 0.11.4+
    ```bash
    nvim --version
    ```
 
-2. **Git**
+2. Git
    ```bash
    git --version
    ```
 
-3. **Node.js & npm** (for some LSP servers)
+3. Node.js & npm (for some LSP servers)
    - [Download Node.js](https://nodejs.org/)
 
 ---
@@ -283,7 +317,7 @@ nvim
 
 ---
 
-## 📁 Configuration Structure
+## Configuration Structure
 
 ```
 ~/.config/nvim/
@@ -300,15 +334,15 @@ nvim
 
 ---
 
-## 🌐 Language Support
+## Language Support
 
 | Language | LSP | Formatter | Linter | Features |
 |----------|-----|-----------|--------|----------|
-| **Python** | Pyright | Black, isort | pylint, flake8 | ✅ Format on save |
-| **JavaScript** | ts_ls | Prettier | ESLint | ✅ Format on save |
-| **TypeScript** | ts_ls | Prettier | ESLint | ✅ Format on save |
-| **Go** | gopls | goimports, gofmt | - | ✅ Format on save |
-| **Java** | JDTLS | - | - | ✅ LSP support |
+| Python | Pyright | Black, isort | pylint, flake8 | Format on save |
+| JavaScript | ts_ls | Prettier | ESLint | Format on save |
+| TypeScript | ts_ls | Prettier | ESLint | Format on save |
+| Go | gopls | goimports, gofmt | - | Format on save |
+| Java | JDTLS | - | - | LSP support |
 
 ### Python Setup
 
@@ -323,7 +357,7 @@ source .venv/bin/activate  # macOS/Linux
 
 ---
 
-## 🎹 Keymaps
+## Keymaps
 
 ### General
 
@@ -407,39 +441,39 @@ source .venv/bin/activate  # macOS/Linux
 
 ---
 
-## 🔌 Plugins
+## Plugins
 
 ### Core Plugins
 
-- **lazy.nvim** - Plugin manager
-- **mason.nvim** - Package manager for LSPs, formatters, linters
-- **nvim-cmp** - Autocompletion engine
-- **nvim-lspconfig** - LSP configuration
-- **LuaSnip** - Snippet engine
+- lazy.nvim - Plugin manager
+- mason.nvim - Package manager for LSPs, formatters, linters
+- nvim-cmp - Autocompletion engine
+- nvim-lspconfig - LSP configuration
+- LuaSnip - Snippet engine
 
 ### UI Plugins
 
-- **github-nvim-theme** - GitHub Dark High Contrast theme
-- **lualine.nvim** - Statusline
-- **bufferline.nvim** - Tab bar
-- **nvim-tree.lua** - File explorer
+- github-nvim-theme - GitHub Dark High Contrast theme
+- lualine.nvim - Statusline
+- bufferline.nvim - Tab bar
+- nvim-tree.lua - File explorer
 
 ### Productivity Plugins
 
-- **telescope.nvim** - Fuzzy finder
-- **Comment.nvim** - Comment toggle
-- **toggleterm.nvim** - Terminal integration
-- **nvim-autopairs** - Auto-pair brackets
-- **lsp_lines.nvim** - Inline diagnostics
+- telescope.nvim - Fuzzy finder
+- Comment.nvim - Comment toggle
+- toggleterm.nvim - Terminal integration
+- nvim-autopairs - Auto-pair brackets
+- lsp_lines.nvim - Inline diagnostics
 
 ### Formatting & Linting
 
-- **conform.nvim** - Code formatting
-- **nvim-lint** - Code linting
+- conform.nvim - Code formatting
+- nvim-lint - Code linting
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### LSP not starting for Python
 
@@ -526,15 +560,64 @@ If it fails, ensure the plugin is properly installed by running:
 
 ---
 
-## 📝 Tips & Tricks
+## Tips & Tricks
 
-1. **Search project-wide**: Press `<leader>f` with Telescope to search entire project
-2. **Comment blocks**: Select lines in visual mode and press `<leader>/`
-3. **Window navigation**: Use `<C-h/j/k/l>` to move between split windows
-4. **Terminal**: Open terminal with `<leader>t` for quick shell access
-5. **Hover docs**: Press `K` on any symbol to see documentation
-6. **Code actions**: Press `<C-A-l>` to see available quick-fix actions
-7. **Rename symbol**: Press `<F2>` to rename across your codebase
+1. Search project-wide - Press `<leader>f` with Telescope to search entire project
+2. Comment blocks - Select lines in visual mode and press `<leader>/`
+3. Window navigation - Use `<C-h/j/k/l>` to move between split windows
+4. Terminal - Open terminal with `<leader>t` for quick shell access
+5. Hover docs - Press `K` on any symbol to see documentation
+6. Code actions - Press `<C-A-l>` to see available quick-fix actions
+7. Rename symbol - Press `<F2>` to rename across your codebase
+
+---
+
+## Customization
+
+Edit these files to customize your config:
+
+- Keymaps: `~/.config/nvim/lua/core/keymaps.lua`
+- Options: `~/.config/nvim/lua/core/options.lua`
+- Plugins: `~/.config/nvim/lua/plugins/init.lua`
+
+---
+
+## Dependency Summary
+
+### Required
+
+- Neovim 0.11.4+
+- Git
+- Node.js & npm
+
+### Optional (by language)
+
+**Python**: pyright, black, isort, pylint, flake8
+
+**JavaScript/TypeScript**: prettier, eslint, typescript
+
+**Go**: go, goimports, golangci-lint
+
+**Java**: JDK, JDTLS (auto-installed via Mason)
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+You are free to:
+- Use this configuration for personal or commercial projects
+- Modify and adapt it to your needs
+- Distribute copies of this work
+- Include this work in derivative projects
+
+The only requirement is to include a copy of the license and copyright notice.
+
+---
+
+**Last Updated**: October 31, 2025  
+**Neovim Version**: 0.11.4+
 
 ---
 
