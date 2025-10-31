@@ -8,6 +8,7 @@ require("lazy").setup({
   -- Core Plugins
   -----------------------------------------------------------
   { "williamboman/mason.nvim", config = true },
+  { "windwp/nvim-autopairs", config = true },
   { "williamboman/mason-lspconfig.nvim" },
   { "neovim/nvim-lspconfig" },
 
@@ -58,7 +59,50 @@ require("lazy").setup({
       })
     end,
   },
+
+  -----------------------------------------------------------
+  -- nvim-tree File Tree
+  -----------------------------------------------------------
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          side = "right",      -- show on the right side
+          width = 35,
+        },
+        renderer = {
+          group_empty = true,
+        },
+        filters = {
+          dotfiles = false,
+        },
+      })
+
+      -- Toggle with Ctrl + b
+      vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+    end,
+  },
+
+  -----------------------------------------------------------
+  -- akinsho/bufferline (Tabs)
+  -----------------------------------------------------------
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("bufferline").setup({
+        options = {
+          diagnostics = "nvim_lsp",
+          separator_style = "slant",
+        },
+      })
+    end,
+  },
 })
+
 
 -----------------------------------------------------------
 -- nvim-cmp Setup (Autocompletion)
@@ -112,3 +156,11 @@ vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
 vim.opt.signcolumn = "yes" -- Always show gutter for LSP signs
+
+-----------------------------------------------------------
+-- Keymaps
+-----------------------------------------------------------
+vim.keymap.set("n", "<Tab>", ":bnext<CR>")
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>")
+vim.keymap.set("i", "<A-BS>", "<C-w>", { noremap = true })  -- delete previous word in insert mode
+vim.keymap.set("n", "<A-BS>", "db", { noremap = true })     -- delete previous word in normal mode
